@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ඔයා වෙනුවෙන් පුංචි රහස් ගමනක් ❤️</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:24px 14px;display:grid;place-items:center;font-family:system-ui,"Noto Sans Sinhala",sans-serif;color:#40283a;background:radial-gradient(circle at top,#fff5f8,#f8e5ef 55%,#f2d9e7)}
+.card{width:min(100%,540px);background:#ffffffef;border:1px solid #f3d5e2;border-radius:26px;padding:28px 23px;box-shadow:0 18px 55px #9b58751c;text-align:center}
+.heart{font-size:35px}h1{font-size:clamp(25px,6vw,34px);margin:8px 0 10px}.intro{line-height:1.8;color:#76586b}
+.progress{height:7px;background:#f7e6ee;border-radius:20px;overflow:hidden;margin:23px 0}.bar{height:100%;width:0;background:#d66b99;transition:width .3s}
+.number{color:#bd5c87;font-weight:700;font-size:14px}.question{font-size:20px;line-height:1.8;margin:13px 0 20px}
+textarea{width:100%;min-height:90px;resize:vertical;border:1.5px solid #edc8d9;border-radius:14px;padding:13px;font:inherit;font-size:16px;outline:none;background:#fffafd;color:#40283a}
+textarea:focus{border-color:#d66b99;box-shadow:0 0 0 3px #d66b9920}
+button{border:0;border-radius:999px;padding:13px 23px;margin-top:17px;background:#c95f8d;color:white;font:inherit;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 7px 18px #c95f8d35}
+button:hover{background:#b94f7e}.hint{font-size:13px;color:#987b8d;margin-top:10px}.hidden{display:none}
+.final{font-size:18px;line-height:1.9}.sparkle{font-size:28px}
+a.gift{display:inline-block;text-decoration:none;background:#7c557f;color:white;padding:13px 22px;border-radius:999px;margin-top:16px;font-weight:700}
+.small{color:#9b7d8e;font-size:12px;margin-top:22px}.send{background:#218c58}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="heart">💗 🎁 💗</div>
+<section id="welcome">
+<h1>ඔයා වෙනුවෙන් පුංචි රහස් ගමනක්!</h1>
+<p class="intro">අද ඔයාට තියෙන්නේ පුංචි අභියෝගයක්. ඉඟි පහක් තියෙනවා. එකින් එක කියවලා ඔයාගේ හිතට එන උත්තර ලියන්න. අවසානයේ පුංචි තෑග්ගක් තියෙනවා! 🥹</p>
+<button onclick="startQuiz()">ගමන පටන් ගමු ❤️</button>
+</section>
+<section id="quiz" class="hidden">
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="number" id="number"></div><div class="question" id="question"></div>
+<textarea id="answer" placeholder="ඔයාගේ උත්තරය මෙතැන ලියන්න..."></textarea><br>
+<button onclick="nextQuestion()" id="next">ඊළඟ ඉඟියට යමු</button>
+<div class="hint">ඔයාගේ හිතට එන උත්තරය ලියන්න. ❤️</div>
+</section>
+<section id="finish" class="hidden">
+<div class="sparkle">🎉 ✨ 🎂 ✨ 🎉</div><h1>ඔයා ඒක කළා!</h1>
+<p class="final">මේ පුංචි රහස් ගමනේ අවසානයට ආවට ස්තුතියි. ❤️<br><br>
+ඔයා මට විශේෂ කෙනෙක්. ඔයාගේ අලුත් අවුරුද්ද සතුටින්, ආදරයෙන් සහ ලස්සන මතකවලින් පිරෙන්න කියලා හදවතින්ම ප්‍රාර්ථනා කරනවා.<br><br><strong>සුබ උපන්දිනයක්! 🥳💗</strong></p>
+<button class="send" onclick="sendAnswers()">මගේ උත්තර ටික යවන්න ❤️</button>
+<div class="hint">ඔයාගේ උත්තර ටික මට email එකෙන් යවන්න මේ බොත්තම ඔබන්න. ❤️</div>
+<a class="gift" id="giftLink" href="#" target="_blank" rel="noopener">මගේ තෑග්ග බලන්න 🎁</a>
+<div class="small">උත්තර යැවීමට පෙර, ඒවා මගේ email එකට යවන බව දැනුවත්ව ඉදිරියට යන්න. ❤️</div>
+</section>
+</main>
+<script>
+const birthdayWebsite = "birthday_surprise.html";
+// ඔයාගේ WhatsApp අංකය රටේ කේතය සමඟ මෙතැනට දාන්න (උදා: 947XXXXXXXX).
+// හිස්ව තිබුණොත් එයාට WhatsApp contact එක තෝරාගන්න පුළුවන්.
+const yourWhatsAppNumber = "";
+const questions = [
+"ඉඟිය 01 🧩\nඅපි දෙන්නා අතර ඔයාට කවදාවත් අමතක නොවන ලස්සනම මතකයක් මොකක්ද?",
+"ඉඟිය 02 💭\nමම ඔයාට ආදරෙන් කියන විශේෂ නම මොකක්ද?",
+"ඉඟිය 03 ❤️\nඅපි දෙන්නා කතා කරපු වෙලාවක ඔයාට වැඩියෙන්ම සතුටු හිතුණු මොහොත මොකක්ද?",
+"ඉඟිය 04 🌷\nමම ඔයා ගැන වැඩියෙන්ම අගය කරන ගුණාංගයක් මොකක්ද කියලා හිතනවද?",
+"ඉඟිය 05 🎉\nඅද ඔයාගේ උපන්දිනයට මගෙන් ලැබෙන ලොකුම පැතුම මොකක් වෙයිද?"
+];
+let current=0;const answers=[];
+function startQuiz(){document.getElementById('welcome').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');showQuestion();}
+function showQuestion(){document.getElementById('number').textContent=`ඉඟිය ${current+1} / ${questions.length}`;document.getElementById('question').textContent=questions[current];document.getElementById('answer').value='';document.getElementById('bar').style.width=`${current/questions.length*100}%`;document.getElementById('next').textContent=current===questions.length-1?'අවසාන තෑග්ග බලමු 🎁':'ඊළඟ ඉඟියට යමු';}
+function nextQuestion(){const v=document.getElementById('answer').value.trim();if(!v){document.getElementById('answer').focus();return;}answers.push(v);current++;if(current<questions.length)showQuestion();else{document.getElementById('quiz').classList.add('hidden');document.getElementById('finish').classList.remove('hidden');const link=document.getElementById('giftLink');if(birthdayWebsite.startsWith('https://')||birthdayWebsite.startsWith('http://'))link.href=birthdayWebsite;else link.addEventListener('click',e=>{e.preventDefault();alert('තෑග්ගේ link එක තවම දාලා නැහැ. HTML එකේ birthdayWebsite තැනට ඔයාගේ website link එක දාන්න.');});}}
+async function sendAnswers(){
+ const btn=document.querySelector('.send');
+ btn.disabled=true; btn.textContent='යවමින්...';
+ let msg="Birthday Treasure Hunt - Answers\n\n";
+ questions.forEach((q,i)=>{msg+=q+"\n"+(answers[i]||"")+"\n\n";});
+ msg+="Submitted from the birthday treasure hunt.";
+ try{
+   const response=await fetch('https://formsubmit.co/ajax/Lakshanik53@gmail.com',{
+     method:'POST',
+     headers:{'Content-Type':'application/json','Accept':'application/json'},
+     body:JSON.stringify({
+       _subject:'Birthday Treasure Hunt - New Answers',
+       _template:'table',
+       name:'Birthday Treasure Hunt',
+       answers:msg
+     })
+   });
+   const data=await response.json();
+   if(data.success==='true'){
+     btn.textContent='උත්තර යැව්වා! ❤️';
+     document.querySelector('.hint').textContent='ස්තුතියි! ඔයාගේ උත්තර email එකෙන් යැව්වා. ❤️';
+   }else{
+     throw new Error(data.message||'Email submission was not accepted');
+   }
+ }catch(error){
+   btn.disabled=false; btn.textContent='නැවත උත්සාහ කරන්න ❤️';
+   document.querySelector('.hint').textContent='දැන් යවන්න බැරි වුණා. Internet connection එක බලලා නැවත උත්සාහ කරන්න.';
+ }
+}
+</script>
+</body>
+</html>
